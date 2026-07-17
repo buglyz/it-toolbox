@@ -28,7 +28,7 @@ export default function AiErrorExplain() {
       const res = await fetch('/api/ai/error-explain', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ error: errorText, context }),
+        body: JSON.stringify({ errorText, error: errorText, context }),
       })
       const json = await res.json() as { success: boolean; data?: ErrorResult; error?: string }
       if (json.success && json.data) {

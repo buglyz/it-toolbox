@@ -21,6 +21,12 @@ const app = new Hono<{ Bindings: Env }>()
 
 app.use('/api/*', cors())
 
+app.onError((err, c) => {
+  console.error('api error', err)
+  return c.json({ success: false, error: err?.message || String(err) }, 500)
+})
+
+
 app.get('/api/health', (c) => c.json({ ok: true, ts: Date.now() }))
 
 app.route('/api/ip', ipRoute)
